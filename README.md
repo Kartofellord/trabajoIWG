@@ -1,5 +1,5 @@
 # trabajoIWG
-#Integrantes
-#Descripcion
-#Imagenes explicativas
-#Instrucciones de instalacion
+-Oscar Prado
+-Amanda Valdevenito
+-Joaquin Ayala 
+-Francisca Requena
