@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -17,11 +17,11 @@ def signin(request):
 
         if userLog is not None:
             login(request, userLog)
-            uName = userLog.username
-            return redirect("http://127.0.0.1:8000/", {'uName': uName})
+            uName = userLog.get_username
+            return redirect("http://127.0.0.1:8000/", {'uName':uName})
 
         else:
-            messages.error(request, "Tus credenciales no coinciden")
+            messages.error(request, "Tu nombre de usuario o contraseña estan erroneos")
 
 
     return render(request, "user/signin.html")
@@ -72,4 +72,9 @@ def signup(request):
         return render(request, 'user/signin.html')
     
     return render(request, "user/signup.html")
+
+def signout(request):
+    logout(request)
+    messages.success(request, "Cerraste sesión de forma exitosa")
+    return redirect("http://127.0.0.1:8000/")
  

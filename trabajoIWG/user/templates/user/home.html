@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
     <title>Home</title>
 </head>
 <body>
-    <div>
-        <div id="">
-            <h2>Estas es el menu de inicio</h2>
+    <div class="container">
+        <div class="header">
+            <h1>Estas es el menu de inicio<h1>
         </div>
-        <div id="">
+        <div class="content">
             {% if user.is_authenticated %}
-            
-            <div><h3>Bienvenido {{uName}}</h3></div>
-
+            <div><h3>Bienvenido</h3>{{ uName }}</div>
+            <div><button type="submit"><a href="/signout">Cerrar sesión</a></button></div>
             {% else %}
             <div><h3>Inicia sesión aqui</h3></div>
             <div><button type="submit"><a href="/signin">Iniciar sesión</a></button></div>
