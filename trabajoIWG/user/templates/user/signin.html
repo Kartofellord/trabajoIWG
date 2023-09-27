@@ -6,26 +6,24 @@
     <title>Login</title>
 </head>
 <body>
-
-    <h2>Bienvenido, inicia sesión:</h2>
-
-    <form action="/signin/" method="post">
-    {% csrf_token %}
-        <label for="">Ingresa tu nombre de usuario:</label>
-        <input type="text" id="username" name="username" placeholder="Tu nombre de usuario">
-        
-        <br>
-        
-        <label for="">Ingresa tu contraseña:</label>
-        <input type="password" id="pass" name="pass" placeholder="Contrasñea">
-        
-        <br>
-      
-        <button type="sumbit">Iniciar sesión</button>
-
-    </form>
-
-    <button type="sumbit"><a href="/signup">Registrarse</a></button>
+    <div>
+        <div>
+            <h2>Bienvenido, inicia sesión:</h2>
+        </div>
+        <div>
+            <form action="/signin/" method="post">
+            {% csrf_token %}
+                <div><input type="text" id="username" name="username" placeholder="Nombre de usuario"></div>
+                <br>   
+                <div><input type="password" id="pass" name="pass" placeholder="Contraseña"></div>
+                <br>
+                <div><button type="sumbit">Iniciar sesión</button></div>
+            </form>
+        </div>
+        <div>
+            <button type="sumbit"><a href="/signup">Registrarse</a></button>
+        </div>
+    </div>
     
 </body>
 </html>

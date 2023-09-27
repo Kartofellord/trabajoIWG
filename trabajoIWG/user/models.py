@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-
+'''
 class userData(models.Model):
     userClass = models.PositiveIntegerField() #Distincion entre persona y entidad
     userType = models.CharField() #Rubro o rol de la persona
@@ -16,3 +16,5 @@ class userData(models.Model):
     #puede quiza incluir foto?
 
     #esto por ahora no es funcional
+
+'''

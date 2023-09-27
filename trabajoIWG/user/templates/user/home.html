@@ -6,13 +6,21 @@
     <title>Home</title>
 </head>
 <body>
+    <div>
+        <div id="">
+            <h2>Estas es el menu de inicio</h2>
+        </div>
+        <div id="">
+            {% if user.is_authenticated %}
+            
+            <div><h3>Bienvenido {{uName}}</h3></div>
 
-    <h2>Estas es el menu de inicio</h2>
-
-    {% if user.is_authenticated %}
-    <h1>Iniciaste sesión correctamente {{uName}}</h1>
-
-    {% endif %}
+            {% else %}
+            <div><h3>Inicia sesión aqui</h3></div>
+            <div><button type="submit"><a href="/signin">Iniciar sesión</a></button></div>
+            {% endif %}
+        </div>
+    </div>
 
 </body>
 </html>
