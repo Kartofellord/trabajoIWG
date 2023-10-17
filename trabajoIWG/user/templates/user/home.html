@@ -5,21 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <script src="{% static 'js/home.js'%}"></script>
     <title>Home</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Estas es el menu de inicio<h1>
+    <div class="root">
+        <div class="sticky-header" id="stickyHeader">
+            <p>TEST</p>
         </div>
-        <div class="content">
-            {% if user.is_authenticated %}
-            <div><h3>Bienvenido</h3>{{ uName }}</div>
-            <div><button type="submit"><a href="/signout">Cerrar sesión</a></button></div>
-            {% else %}
-            <div><h3>Inicia sesión aqui</h3></div>
-            <div><button type="submit"><a href="/signin">Iniciar sesión</a></button></div>
-            {% endif %}
+        <div class="main">
+            <div class="header">
+                <h1>Estas en el menu de inicio<h1>
+            </div>
+            <div class="content">
+                {% if user.is_authenticated %}
+                <div><h3>Bienvenido {{ user }}</h3></div>
+                <div><button type="submit"><a href="/signout">Cerrar sesión</a></button></div>
+                {% else %}
+                <div><h3>Inicia sesión aqui</h3></div>
+                <div><button type="submit"><a href="/signin">Iniciar sesión</a></button></div>
+                {% endif %}
+            </div>
         </div>
     </div>
 
