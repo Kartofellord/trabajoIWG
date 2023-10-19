@@ -1,0 +1,60 @@
+body {
+    font-family: Verdana, Tahoma, Geneva, 'Segoe UI', sans-serif;
+    margin: 0px;
+}
+
+.sticky-header {
+    padding: 0px 7px;
+    background-color: #4CAF50;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.main {
+    padding: 16px;
+}
+
+.sticky-header + .main {
+    padding-top: 102px;
+}
+
+.header-div {
+    display: inline-block;
+}
+
+.home-bttn {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 3px;
+}
+
+.button {
+    padding: 6px 18px;
+    display: inline-block;
+    color: #fff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.button:hover {
+    background-color: #a6d8a8;
+}
+
+.tp1 {
+    font-size: 25px;
+    margin: 0;
+    padding: 5px 5px;
+}
+
+.tp2 {
+    font-size: 16px;
+}
