@@ -3,37 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Personales-->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/main.css'%}">
-    <script src="{% static 'js/sticky-header.js'%}"></script>
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/sticky-header.js' %}"></script>
+
+    <!--Mapa-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet'/>
+
+    <title>Inicio</title>
+
 </head>
+
 <body>
     <div class="root">
-        <!-- La ventanita con cosas -->
+    <!-- El encabezado -->
     <div class="sticky-header" id="stickyHeader">
-        <div class="header-div"><a href="/" class="home-bttn">
-            <div> <!-- ¿Logo? --></div>
-            <div class="tp1">EMaps</div>
+        <div class="left-header-div"><a href="/" class="home-bttn">
+            <div class="tp1"> <!-- ¿Logo? --></div>
+            <div class="tp1">Katastrophe</div>
         </a></div>
             {% if user.is_authenticated %}
-        <div class="header-div">
+        <div class="center-header-div">
             <div class="tp2">Sesión iniciada como {{ user }}</div>
         </div>
             {% endif %}
-        <div class="header-div">
+        <div class="right-header-div">
             {% if user.is_authenticated %}
-            <a href="/signout"><div class="button">Cerrar sesión</div></a>
+            <a href="/signout"><div class="div-button">Cerrar sesión</div></a>
             {% else %}
-            <a href="/signin"><div class="button">Iniciar sesión</div></a>
+            <a href="/signin"><div class="div-button">Iniciar sesión</div></a>
             {% endif %}
         </div>
     </div>
-        <!-- La pagina -->
+
+    <!-- La pagina -->
         <div class="main">
-            <div id="map"><script src="{% static 'js/map.js'%}"></script></div>
+            <!--Mapa-->
+            <div class="map" id="map"></div>
         </div>
     </div>
+
+    <!-- Script Mapa -->
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoib3ByYWRvIiwiYSI6ImNsbnh5ajc0MjBqZmUybGxqYWFoMG9tMGUifQ.00CFhrjNRQpCyBQDBuCpSg';
+        const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/oprado/clo07xyim00ao01qpfls54kj7/draft', // style URL
+        center: [-35, 25], // starting position [lng, lat]
+        zoom: 2.3 // starting zoom
+        });
+
+        // At low zooms, complete a revolution every two minutes.
+        const secondsPerRevolution = 40;
+        // Above zoom level 5, do not rotate.
+        const maxSpinZoom = 3;
+        // Rotate at intermediate speeds between zoom levels 3 and 5.
+        const slowSpinZoom = 2.5;
+
+        let userInteracting = false;
+
+        function spinGlobe() {
+            const zoom = map.getZoom();
+            if (!userInteracting && zoom < maxSpinZoom) {
+                let distancePerSecond = 180 / secondsPerRevolution;
+                if (zoom > slowSpinZoom) {
+                    // Slow spinning at higher zooms
+                    const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+                    distancePerSecond *= zoomDif;
+                    }
+                const center = map.getCenter();
+                center.lng -= distancePerSecond;
+                // Smoothly animate the map over one second.
+                // When this animation is complete, it calls a 'moveend' event.
+                map.easeTo({ center, duration: 1000, easing: (n) => n });
+                }
+            }
+ 
+        // Pause spinning on interaction
+        map.on('mousedown', () => {
+        userInteracting = true;
+        });
+
+        map.on('mouseup', () => {
+        userInteracting = false;
+        setInterval(spinGlobe,7000)
+        });
+
+        map.on('dragend', () => {
+        userInteracting = false;
+        setInterval(spinGlobe,7000)
+        });
+
+        map.on('pitchend', () => {
+        userInteracting = false;
+        setInterval(spinGlobe,7000)
+        });
+
+        map.on('rotateend', () => {
+        userInteracting = false;
+        setInterval(spinGlobe,7000)
+        });
+
+        map.on('moveend', () => {
+        spinGlobe();
+        });
+
+        spinGlobe();
+    </script>
 
 </body>
 </html>
