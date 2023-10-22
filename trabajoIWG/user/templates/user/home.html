@@ -27,7 +27,7 @@
         </a></div>
             {% if user.is_authenticated %}
         <div class="center-header-div">
-            <div class="tp2">Sesión iniciada como {{ user }}</div>
+            <div class="tp2">Sesión iniciada como {{ user }} {{ user.id }}</div>
         </div>
             {% endif %}
         <div class="right-header-div">

@@ -1,12 +1,41 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from .models import userProfile
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+import pycountry
+import base64
 
 # Create your views here.
 
 def home(request):
     return render(request, "user/home.html")
+
+ 
+def profile(request):
+    if request.method == "POST":
+        tipo = request.POST.get('tipo')
+        pais = request.POST.get('pais')
+        profesion = request.POST.get('profesion')
+        biografia = request.POST.get('biografia')
+
+        pic = request.FILES['pic']
+        encoded = base64.b64encode(pic.read())
+          
+        profile = userProfile.objects.create(userClass = tipo,userPic = encoded.decode("utf-8"), userType = profesion,userCountry = pais, userBio = biografia,user = request.user)
+        profile.save()
+
+        return redirect("http://127.0.0.1:8000/profile/", {'profile':profile})
+
+        #validar inputs
+
+
+       
+
+    all_countries = list(pycountry.countries)
+    return render(request, "user/profile.html", {'countries':[country.name for country in all_countries]})
+
+
 
 def signin(request):
     if request.method == "POST":
@@ -18,12 +47,14 @@ def signin(request):
         if userLog is not None:
             login(request, userLog)
             uName = userLog.get_username
-            return redirect("http://127.0.0.1:8000/", {'user':uName})
+            user_id = userLog.id
+            print(user_id)
+            return redirect("http://127.0.0.1:8000/", {'user':uName, 'user_id':user_id})
 
         else:
             messages.error(request, "Tu nombre de usuario o contraseña estan erroneos")
-
-
+   
+    
     return render(request, "user/signin.html")
 
 def signup(request):
