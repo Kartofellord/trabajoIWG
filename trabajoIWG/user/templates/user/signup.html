@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creación de cuenta</title>
+   
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}"> 
 </head>
 <body>
-    
-    <h2>Crea una cuenta</h2>
+    <section>
+        <div class="form-box">
+            <h2>Crea una cuenta</h2>
 
-    <form action="/signup/" method="post">
-    {% csrf_token %}
-        <input type="text" id="username" name="username" placeholder="Nombre de usuario">       
-        <br>       
-        <input type="password" id="pass1" name="pass1" placeholder="Contraseña">       
-        <br>       
-        <input type="password" id="pass2" name="pass2" placeholder="Confirma tu contrasñea">
-        <br>
-        <input type="email" id="email1" name="email1" placeholder="Email">
-        <br>
-        <input type="email" id="email2" name="email2" placeholder="Confirma tu email">
-        <br>
-        <button type="submit">Registrarte</button>
-    </form>
-
+            <form action="/signup/" method="post">
+                {% csrf_token %}
+                <div class="inputbox">
+                    <input type="text" id="username" name="username" placeholder="Nombre de usuario">
+                    <label for="username">Nombre de usuario</label>
+                </div>
+                <div class="inputbox">
+                    <input type="password" id="pass1" name="pass1" placeholder="Contraseña">
+                    <label for="pass1">Contraseña</label>
+                </div>
+                <div class="inputbox">
+                    <input type="password" id="pass2" name="pass2" placeholder="Confirma tu contraseña">
+                    <label for="pass2">Confirma tu contraseña</label>
+                </div>
+                <div class="inputbox">
+                    <input type="email" id="email1" name="email1" placeholder="Email">
+                    <label for="email1">Email</label>
+                </div>
+                <div class="inputbox">
+                    <input type="email" id="email2" name="email2" placeholder="Confirma tu email">
+                    <label for="email2">Confirma tu email</label>
+                </div>
+                <button type="submit">Registrarte</button>
+            </form>
+        </div>
+    </section>
 </body>
 </html>

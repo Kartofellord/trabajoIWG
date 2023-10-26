@@ -11,8 +11,12 @@ import base64
 def home(request):
     return render(request, "user/home.html")
 
- 
 def profile(request):
+
+
+    return render(request, "user/profile.html")
+
+def profileSettings(request):
     if request.method == "POST":
         tipo = request.POST.get('tipo')
         pais = request.POST.get('pais')
@@ -29,11 +33,8 @@ def profile(request):
 
         #validar inputs
 
-
-       
-
     all_countries = list(pycountry.countries)
-    return render(request, "user/profile.html", {'countries':[country.name for country in all_countries]})
+    return render(request, "user/profileSettings.html", {'countries':[country.name for country in all_countries]})
 
 
 

@@ -10,6 +10,4 @@ class userProfile(models.Model):
     userFollwers = models.PositiveIntegerField(null=True, default=0) #Cantidad de segiudores
     userQualy = models.FloatField(null=True, default=0.0) #Calificacion que tendra el usuario (0 a 5)
     userBio= models.CharField(max_length=150) #Descripcion del usuario *
-    user = models.OneToOneField(User,on_delete=models.CASCADE, unique=True)#clase asociada a un usuaeio
-
- 
+    user = models.OneToOneField(User,on_delete=models.CASCADE, unique=True) #clase asociada a un usuario

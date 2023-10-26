@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Personales-->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/sticky-header.js' %}"></script>
+
+    <title>Perfil</title>
+
+</head>
+
+<body>
+    <div class="root">
+    <!-- El encabezado -->
+    <div class="sticky-header" id="stickyHeader">
+        <div class="left-header-div"><a href="/" class="home-bttn">
+            <div class="tp1"> <!-- ¿Logo? --></div>
+            <div class="tp1">Katastrophe</div>
+        </a></div>
+            {% if user.is_authenticated %}
+        <div class="center-header-div">
+            <div class="tp2">Sesión iniciada como {{ user }}</div>
+        </div>
+            {% endif %}
+        <div class="right-header-div">
+            {% if user.is_authenticated %}
+            <a href="/signout"><div class="div-button">Cerrar sesión</div></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- La pagina -->
+        <div class="main">
+            
+            <form action="/profile/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <select name= "tipo">
+                        <option value="1">Persona</option>
+                        <option value="2">Entidad</option>
+                    </select><br>
+                    <select name="pais">
+                        {%for country in countries %}
+                            <option value="{{country}}">{{country}}</option>
+                        {%endfor%}
+                    </select><br>
+                    <input type="text" id="userType" name= "profesion" placeholder="ingresar profesion"><br>
+                    bio<br>
+                    <textarea type="text" id="userBio" name="biografia" placeholder="escribir biografia"> </textarea><br>
+                    <input type="file" accept="image/png , image/jpeg. image/jpg" id="pic" name="pic" placeholder="Seleccione una imagen"><br>
+                    <input type="submit">     
+            </form>
+
+             
+        </div>
+    </div>
+
+</body>
+</html>
