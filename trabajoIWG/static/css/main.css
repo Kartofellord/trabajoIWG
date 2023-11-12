@@ -24,6 +24,7 @@ a {
     background-color: #121331;
     display: flex;
     justify-content: space-between;
+    z-index: 999;
 }
 
 .main {

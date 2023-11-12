@@ -1,22 +1,33 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404
 from django.contrib.auth.models import User
+from .models import Posts
 from .models import userProfile
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 import pycountry
 import base64
-
+from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse
 # Create your views here.
 
 def home(request):
     return render(request, "user/home.html")
 
 def profile(request):
-
-
-    return render(request, "user/profile.html")
+    try:
+        profile = userProfile.objects.get(user_id=request.user.id)
+        if profile:
+            posts = Posts.objects.filter(user_id=request.user.id)
+            return render(request, "user/profile.html", {'profile':profile, 'posts':posts})
+        else:
+            return redirect('http://127.0.0.1:8000/profile/settings')
+    except userProfile.DoesNotExist:
+            return redirect('http://127.0.0.1:8000/profile/settings')
+    except Posts.DoesNotExist:
+          return render(request, "user/profile.html", {'profile':profile, 'posts':[]})
 
 def profileSettings(request):
+
     if request.method == "POST":
         tipo = request.POST.get('tipo')
         pais = request.POST.get('pais')
@@ -28,8 +39,11 @@ def profileSettings(request):
           
         profile = userProfile.objects.create(userClass = tipo,userPic = encoded.decode("utf-8"), userType = profesion,userCountry = pais, userBio = biografia,user = request.user)
         profile.save()
-
-        return redirect("http://127.0.0.1:8000/profile/", {'profile':profile})
+       
+        
+         
+        
+        return redirect("http://127.0.0.1:8000/profile/")
 
         #validar inputs
 

@@ -11,3 +11,7 @@ class userProfile(models.Model):
     userQualy = models.FloatField(null=True, default=0.0) #Calificacion que tendra el usuario (0 a 5)
     userBio= models.CharField(max_length=150) #Descripcion del usuario *
     user = models.OneToOneField(User,on_delete=models.CASCADE, unique=True) #clase asociada a un usuario
+
+class Posts(models.Model):
+    post =models.TextField()
+    user = models.ForeignKey(User,on_delete=models.CASCADE) #clase asociada a un usuario

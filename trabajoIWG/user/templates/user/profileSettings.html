@@ -7,7 +7,9 @@
     <!--Personales-->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="{% static 'js/sticky-header.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
     <title>Perfil</title>
 
@@ -34,29 +36,64 @@
     </div>
 
     <!-- La pagina -->
-        <div class="main">
+    <div class="main">
+        <section  style="background-color: #9de2ff; padding-top:100px;padding-bottom:50px">    
+            <div class="container py-12  h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col-lg-8 col-xl-6">
+                    <div class="card rounded-3">
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                        class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                        alt="Sample photo">
+                      <div class="card-body p-4 p-md-5 mt-50">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Mi Perfil</h3>
             
-            <form action="/profile/" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                    <select name= "tipo">
-                        <option value="1">Persona</option>
-                        <option value="2">Entidad</option>
-                    </select><br>
-                    <select name="pais">
-                        {%for country in countries %}
-                            <option value="{{country}}">{{country}}</option>
-                        {%endfor%}
-                    </select><br>
-                    <input type="text" id="userType" name= "profesion" placeholder="ingresar profesion"><br>
-                    bio<br>
-                    <textarea type="text" id="userBio" name="biografia" placeholder="escribir biografia"> </textarea><br>
-                    <input type="file" accept="image/png , image/jpeg. image/jpg" id="pic" name="pic" placeholder="Seleccione una imagen"><br>
-                    <input type="submit">     
-            </form>
+                            <form class="px-md-2" action="/profile/settings" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
 
-             
-        </div>
+                                    <div class="form-group mb-4">
+                                        <label for="tipo">Tipo</label>
+                                        <select name="tipo" class="form-control">
+                                            <option value="1">Persona</option>
+                                            <option value="2">Entidad</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="exampleFormControlSelect1">País</label>
+                                        <select name="pais" class="form-control">
+                                            {%for country in countries %}
+                                                <option value="{{country}}">{{country}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="userType">Profesión</label>
+                                        <input type="text" id="userType" class="form-control" name="profesion" />
+                                    </div>
+                                    
+                                    <div class="form-group mb-4">
+                                        <label class="form-label" for="userType">Bio</label>
+                                        <textarea class="form-control"  type="text" id="userBio" name="biografia" placeholder="escribir biografia"> </textarea>
+                                    </div>
+                                   
+                                    <div class="form-group mb-4">
+                                        <label for="exampleFormControlFile1">Example file input</label>
+                                        <input type="file"  class="form-control-file"  accept="image/png , image/jpeg. image/jpg" id="pic" name="pic" placeholder="Seleccione una imagen">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="btn btn-primary btn-lg btn-block mb-2" type="submit">     
+                                    </div>
+                                   
+                            </form>
+                      </div>
+                     </div>
+                 </div>
+                </div>
+            </div>
+        </section>     
+    </div> 
     </div>
-
 </body>
 </html>
