@@ -53,3 +53,21 @@ a {
 .div-button:hover {
     background-color: #2e3a6a;
 }
+
+.marker {
+    background-image: url('/static/img/warning-sign-red-png.png');
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+  }
+  
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+  }

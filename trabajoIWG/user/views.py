@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from django.contrib.auth.models import User
-from .models import Posts
-from .models import userProfile
+from .models import Posts,  userProfile, news
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 import pycountry
 import base64
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
+from django.http import JsonResponse
 # Create your views here.
 
 def home(request):
@@ -136,3 +136,25 @@ def signout(request):
     messages.success(request, "Cerraste sesión de forma exitosa")
     return redirect("http://127.0.0.1:8000/")
  
+def get_data(request):
+    data = news.objects.values('nTitle', 'nBody', 'lat', 'lng')
+
+    geojson = {
+        'type': 'FeatureCollection',
+        'features': [
+            {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [item['lng'], item['lat']],
+                },
+                'properties': {
+                    'title': item['nTitle'],
+                    'description': item['nBody'],
+                },
+            }
+            for item in data
+        ],
+    }
+
+    return JsonResponse(geojson)

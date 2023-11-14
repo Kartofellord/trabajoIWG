@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class userProfile(models.Model):
     userClass = models.PositiveIntegerField() #Distincion entre persona y entidad
-    userPic =models.TextField()
+    userPic = models.TextField()
     userType = models.CharField() #Rubro o rol de la persona profesion
     userCountry = models.CharField() #Pais del usuario
     userFollwers = models.PositiveIntegerField(null=True, default=0) #Cantidad de segiudores
@@ -13,5 +13,11 @@ class userProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, unique=True) #clase asociada a un usuario
 
 class Posts(models.Model):
-    post =models.TextField()
+    post = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE) #clase asociada a un usuario
+
+class news(models.Model): #pequeño test
+    nTitle = models.TextField() #Titulo de la noticia
+    nBody = models.TextField() #El cuerpo de la noticia
+    lat = models.IntegerField(null=True, default = 0) #Posicion en el mapa lat
+    lng = models.IntegerField(null=True, default = 0) #lng
