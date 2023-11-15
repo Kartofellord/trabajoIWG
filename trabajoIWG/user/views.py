@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from django.contrib.auth.models import User
-from .models import Posts,  userProfile, news
+from .models import Posts, userProfile, news
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 import pycountry
 import base64
+from django.db import OperationalError
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.http import JsonResponse
@@ -158,3 +159,14 @@ def get_data(request):
     }
 
     return JsonResponse(geojson)
+def foro(request):
+    if request.method == "GET":
+        try:
+            posts = Posts.objects.all()
+            context = {'posts': posts}
+        except OperationalError:
+            context = {
+                'error': "No hay entradas en el foro."
+            }
+
+        return render(request, "user/foro.html", context)

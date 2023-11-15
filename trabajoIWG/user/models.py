@@ -15,6 +15,7 @@ class userProfile(models.Model):
 class Posts(models.Model):
     post = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE) #clase asociada a un usuario
+    
 
 class news(models.Model): #pequeño test
     nTitle = models.TextField() #Titulo de la noticia
