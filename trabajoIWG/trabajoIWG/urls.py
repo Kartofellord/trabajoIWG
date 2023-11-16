@@ -28,4 +28,5 @@ urlpatterns = [
     path('foro/', foro),
     path('', home),
     path('markers', get_data),
+    path('foro/markers', get_data)
 ]

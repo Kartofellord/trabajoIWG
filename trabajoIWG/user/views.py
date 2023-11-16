@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from django.contrib.auth.models import User
-from .models import Posts, userProfile, news
+from .models import Posts, userProfile
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 import pycountry
@@ -34,16 +34,12 @@ def profileSettings(request):
         pais = request.POST.get('pais')
         profesion = request.POST.get('profesion')
         biografia = request.POST.get('biografia')
-
         pic = request.FILES['pic']
         encoded = base64.b64encode(pic.read())
           
         profile = userProfile.objects.create(userClass = tipo,userPic = encoded.decode("utf-8"), userType = profesion,userCountry = pais, userBio = biografia,user = request.user)
         profile.save()
-       
-        
-         
-        
+
         return redirect("http://127.0.0.1:8000/profile/")
 
         #validar inputs
@@ -81,50 +77,35 @@ def signup(request):
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
 
-
-
         if User.objects.filter(username=uName):
             messages.error(request, "Ese usuario no esta disponible")
             return redirect("http://127.0.0.1:8000/signin/")
-        
         if User.objects.filter(email=uEmail1):
             messages.error(request, "Ese email ya esta en uso")
             return redirect("http://127.0.0.1:8000/signin/")
-        
         if uEmail1 == "":
             messages.error(request, "Por favor ingresa un email valido")
             return redirect("http://127.0.0.1:8000/signin/")
-        
         if uEmail1 != uEmail2:
             messages.error(request, "Los emails no coinciden")
             return redirect("http://127.0.0.1:8000/signin/")
-        
         if uName == "":
             messages.error(request, "Por favor ingresa un nombre de usuario valido")
             return redirect("http://127.0.0.1:8000/signin/")
-
         elif len(uName)>15:
             messages.error(request, "Tu nombre de usuario es demasiado largo (maximo 15 caracteres)")
             return redirect("http://127.0.0.1:8000/signin/")
-        
         if User.objects.filter(email=uEmail1):
             messages.error(request, "Ese email ya esta en uso")
             return redirect("http://127.0.0.1:8000/signin/")
-        
         if pass1 == "":
             messages.error(request, "Por favor ingresa una contraseña valida")
             return redirect("http://127.0.0.1:8000/signin/")
-
         elif pass1 != pass2:
             messages.error(request, "Las contraseñas no coinciden")
 
-
-
         user = User.objects.create_user(uName, uEmail1, pass1)
         user.save()
-
-
-        #Para enviar un email de bienvenida (mas adelante 55:52)
 
         messages.success(request, "Tu cuenta a sido creada exitosamente")
         
@@ -136,9 +117,9 @@ def signout(request):
     logout(request)
     messages.success(request, "Cerraste sesión de forma exitosa")
     return redirect("http://127.0.0.1:8000/")
- 
+
 def get_data(request):
-    data = news.objects.values('nTitle', 'nBody', 'lat', 'lng')
+    data = Posts.objects.values('nTitle', 'nBody', 'lat', 'lng')
 
     geojson = {
         'type': 'FeatureCollection',
@@ -157,8 +138,8 @@ def get_data(request):
             for item in data
         ],
     }
-
     return JsonResponse(geojson)
+
 def foro(request):
     if request.method == "GET":
         try:

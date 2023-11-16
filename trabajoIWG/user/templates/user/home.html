@@ -7,6 +7,7 @@
     <!--Personales-->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/homeMap.css' %}">
     <script src="{% static 'js/sticky-header.js' %}"></script>
 
     <!--Mapa-->
@@ -32,6 +33,7 @@
             {% endif %}
         <div class="right-header-div">
             <a href="/foro"><div class="div-button">Foro</div></a>
+            <a href="/profile"><div class="div-button">Perfil</div></a> <!-- HAY QUE ARREGLARLO DESPUES QUIZA-->
             {% if user.is_authenticated %}
             <a href="/signout"><div class="div-button">Cerrar sesión</div></a>
             {% else %}

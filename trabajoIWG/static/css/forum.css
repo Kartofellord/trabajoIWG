@@ -1,0 +1,8 @@
+.main{
+    display: flex;
+}
+
+.forum{
+    width: 576px;
+    padding-left: 10px;
+}

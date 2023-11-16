@@ -7,9 +7,15 @@
     <!--Personales-->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forumMap.css' %}">
     <script src="{% static 'js/sticky-header.js' %}"></script>
 
-    <title>Inicio</title>
+    <!--Mapa-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet'/>
+
+    <title>Foro</title>
 
 </head>
 
@@ -27,6 +33,8 @@
         </div>
             {% endif %}
         <div class="right-header-div">
+            <a href="/foro"><div class="div-button">Foro</div></a>
+            <a href="/profile"><div class="div-button">Perfil</div></a>
             {% if user.is_authenticated %}
             <a href="/signout"><div class="div-button">Cerrar sesión</div></a>
             {% else %}
@@ -34,4 +42,22 @@
             {% endif %}
         </div>
     </div>
-
+    <!-- La pagina -->
+    <div class="main">
+        <!--Mapa-->
+        <div class="map" id="map"></div>
+        <div class="forum">
+            {%if posts%}
+                {%for obj in posts%}
+                    <h2>{{ obj.nTitle }}</h2>
+                    <p>{{ obj.nBody }}</p>
+                {%endfor%}
+            {%endif%}
+        </div>
+    </div>
+    </div>
+    <!-- Script Mapa -->
+    {% load static %}
+    <script src="{% static 'js/map.js' %}"></script>
+</body>
+</html>
