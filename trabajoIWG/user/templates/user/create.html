@@ -47,18 +47,32 @@
         <!--Mapa-->
         <div class="map" id="map"></div>
         <div class="forum">
-            <a href="/foro/create"><div class="div-button-forum">Crear noticia</div></a>
-            {%if posts%}
-                {%for obj in posts%}
-                    <h2>{{ obj.nTitle }}</h2>
-                    <p>{{ obj.nBody }}</p>
-                {%endfor%}
-            {%endif%}
+            <form action="/foro/create" method="post">
+                {% csrf_token %}
+                <div class="inputbox">
+                    <input type="text" id="nTitle" name="nTitle" placeholder="Titulo">
+                    <label for="title">Titulo</label>
+                </div>
+                <div class="inputbox">
+                    <input type="text" id="nBody" name="nBody" placeholder="Texto">
+                    <label for="title">Texto</label>
+                </div>
+                <div class="inputbox">
+                    <input type="text" id="lat" name="lat" placeholder="Latitud">
+                    <label for="title">Latitud</label>
+                </div>
+                <div class="inputbox">
+                    <input type="text" id="lng" name="lng" placeholder="Longitud">
+                    <label for="title">Longitud</label>
+                </div>
+                <button type="submit">Publicar</button>
+            </form>
         </div>
+    </div>
     </div>
     </div>
     <!-- Script Mapa -->
     {% load static %}
-    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'js/map-create.js' %}"></script>
 </body>
 </html>

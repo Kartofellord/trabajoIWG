@@ -13,9 +13,9 @@ class userProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, unique=True) #clase asociada a un usuario
 
 class Posts(models.Model):
-    post = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE) #clase asociada a un usuario
     nTitle = models.TextField() #Titulo de la noticia
     nBody = models.TextField() #El cuerpo de la noticia
+    nImage = models.TextField() #Imagen
     lat = models.IntegerField(null=True, default = 0) #Posicion en el mapa lat
     lng = models.IntegerField(null=True, default = 0) #lng

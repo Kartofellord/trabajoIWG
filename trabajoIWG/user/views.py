@@ -79,28 +79,28 @@ def signup(request):
 
         if User.objects.filter(username=uName):
             messages.error(request, "Ese usuario no esta disponible")
-            return redirect("http://127.0.0.1:8000/signin/")
+            return redirect("http://127.0.0.1:8000/signup/")
         if User.objects.filter(email=uEmail1):
             messages.error(request, "Ese email ya esta en uso")
-            return redirect("http://127.0.0.1:8000/signin/")
+            return redirect("http://127.0.0.1:8000/signup/")
         if uEmail1 == "":
             messages.error(request, "Por favor ingresa un email valido")
-            return redirect("http://127.0.0.1:8000/signin/")
+            return redirect("http://127.0.0.1:8000/signup/")
         if uEmail1 != uEmail2:
             messages.error(request, "Los emails no coinciden")
-            return redirect("http://127.0.0.1:8000/signin/")
+            return redirect("http://127.0.0.1:8000/signup/")
         if uName == "":
             messages.error(request, "Por favor ingresa un nombre de usuario valido")
-            return redirect("http://127.0.0.1:8000/signin/")
+            return redirect("http://127.0.0.1:8000/signup/")
         elif len(uName)>15:
             messages.error(request, "Tu nombre de usuario es demasiado largo (maximo 15 caracteres)")
-            return redirect("http://127.0.0.1:8000/signin/")
+            return redirect("http://127.0.0.1:8000/signup/")
         if User.objects.filter(email=uEmail1):
             messages.error(request, "Ese email ya esta en uso")
-            return redirect("http://127.0.0.1:8000/signin/")
+            return redirect("http://127.0.0.1:8000/signup/")
         if pass1 == "":
             messages.error(request, "Por favor ingresa una contraseña valida")
-            return redirect("http://127.0.0.1:8000/signin/")
+            return redirect("http://127.0.0.1:8000/signup/")
         elif pass1 != pass2:
             messages.error(request, "Las contraseñas no coinciden")
 
@@ -151,3 +151,18 @@ def foro(request):
             }
 
         return render(request, "user/foro.html", context)
+    
+def news(request):
+
+    if request.method == "POST":
+        nTitle = request.POST.get('nTitle')
+        nBody = request.POST.get('nBody')
+        lng = request.POST.get('lng')
+        lat = request.POST.get('lat')
+
+        news = Posts.objects.create(user = request.user, nTitle = nTitle, nBody = nBody, lat = lat, lng = lng)
+        news.save()
+
+        return redirect("http://127.0.0.1:8000/foro/")
+
+    return render(request, "user/create.html")

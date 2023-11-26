@@ -3,6 +3,13 @@
 }
 
 .forum{
-    width: 576px;
-    padding-left: 10px;
+    width: 1400px;
+    padding: 10px;
+    color: #e0eaf5;
+}
+
+.div-button-forum{
+    color: rgb(0, 0, 0);
+    font-size: 17px;
+    padding: 9px 7px;
 }

@@ -27,9 +27,9 @@
                 {% endif %}
             <div class="right-header-div">
                 <a href="/foro"><div class="div-button">Foro</div></a>
+                {% if user.is_authenticated %}
                 <a href="/profile"><div class="div-button">Perfil</div></a>
                 <a href="/profile/settings"><div class="div-button">Configurar Perfil</div></a>
-                {% if user.is_authenticated %}
                 <a href="/signout"><div class="div-button">Cerrar sesión</div></a>
                 {% endif %}
             </div>

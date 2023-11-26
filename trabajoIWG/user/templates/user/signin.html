@@ -6,9 +6,33 @@
     
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+    <script src="{% static 'js/sticky-header.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>Iniciar sesión</title>
 </head>
 <body>
+    <!-- El encabezado -->
+    <div class="sticky-header" id="stickyHeader">
+        <div class="left-header-div"><a href="/" class="home-bttn">
+            <div class="tp1"> <!-- ¿Logo? --></div>
+            <div class="tp1">Katastrophe</div>
+        </a></div>
+            {% if user.is_authenticated %}
+        <div class="center-header-div">
+            <div class="tp2">Sesión iniciada como {{ user }}</div>
+        </div>
+            {% endif %}
+        <div class="right-header-div">
+            <a href="/foro"><div class="div-button">Foro</div></a>
+            {% if user.is_authenticated %}
+            <a href="/signout"><div class="div-button">Cerrar sesión</div></a>
+            <a href="/profile"><div class="div-button">Perfil</div></a>
+            {% else %}
+            <a href="/signin"><div class="div-button">Iniciar sesión</div></a>
+            {% endif %}
+        </div>
+    </div>
+    <!-- La pagina -->
     <section>
         <div class="form-box">
             <div class="form-value">

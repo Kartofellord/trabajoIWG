@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from user.views import signin, signup, home, signout, profile, profileSettings, get_data, foro
+from user.views import signin, signup, home, signout, profile, profileSettings, get_data, foro, news
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('foro/', foro),
     path('', home),
     path('markers', get_data),
-    path('foro/markers', get_data)
+    path('foro/markers', get_data),
+    path('foro/create', news),
 ]

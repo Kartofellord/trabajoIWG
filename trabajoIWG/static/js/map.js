@@ -62,13 +62,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoib3ByYWRvIiwiYSI6ImNsbnh5ajc0MjBqZmUybGxqYWFoM
     });
 
     spinGlobe();
-
-    const marker1 = new mapboxgl.Marker({
-        draggable: true
-        })
-        .setLngLat([12.554729, 55.70651])
-        .addTo(map);
-
+ 
     fetch('markers')
     .then(response => response.json())
     .then(data => {
