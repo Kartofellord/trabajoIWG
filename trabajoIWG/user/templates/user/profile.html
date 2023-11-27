@@ -18,7 +18,7 @@
         <div class="sticky-header" id="stickyHeader">
             <div class="left-header-div"><a href="/" class="home-bttn">
                 <div class="tp1"> <!-- ¿Logo? --></div>
-                <div class="tp1">Katastrophe</div>
+                <div class="tp1">GEA</div>
             </a></div>
                 {% if user.is_authenticated %}
             <div class="center-header-div">
@@ -78,7 +78,9 @@
                             {%for obj in posts%}
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body p-4 mt-20">
-                                        {{obj.post}}
+                                        {{obj.nTitle}}
+                                        {{obj.nBody}}
+                                        {{obj.link}}
                                     </div>
                                 </div><br>
                             {%endfor%}

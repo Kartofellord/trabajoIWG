@@ -5,7 +5,14 @@
 .forum{
     width: 1400px;
     padding: 10px;
-    color: #e0eaf5;
+    background-color: #e0eaf5;
+}
+
+.news{
+    background-color: #c5ced8;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 2px;
 }
 
 .div-button-forum{

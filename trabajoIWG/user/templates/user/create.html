@@ -25,7 +25,7 @@
     <div class="sticky-header" id="stickyHeader">
         <div class="left-header-div"><a href="/" class="home-bttn">
             <div class="tp1"> <!-- ¿Logo? --></div>
-            <div class="tp1">Katastrophe</div>
+            <div class="tp1">GEA</div>
         </a></div>
             {% if user.is_authenticated %}
         <div class="center-header-div">
@@ -64,6 +64,10 @@
                 <div class="inputbox">
                     <input type="text" id="lng" name="lng" placeholder="Longitud">
                     <label for="title">Longitud</label>
+                </div>
+                <div class="inputbox">
+                    <input type="text" id="link" name="link" placeholder="link">
+                    <label for="title">Link de la noticia</label>
                 </div>
                 <button type="submit">Publicar</button>
             </form>

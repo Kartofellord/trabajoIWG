@@ -19,3 +19,4 @@ class Posts(models.Model):
     nImage = models.TextField() #Imagen
     lat = models.IntegerField(null=True, default = 0) #Posicion en el mapa lat
     lng = models.IntegerField(null=True, default = 0) #lng
+    link = models.TextField() 

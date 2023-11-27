@@ -159,6 +159,7 @@ def news(request):
         nBody = request.POST.get('nBody')
         lng = request.POST.get('lng')
         lat = request.POST.get('lat')
+        link = request.POST.get('link')
 
         news = Posts.objects.create(user = request.user, nTitle = nTitle, nBody = nBody, lat = lat, lng = lng)
         news.save()
