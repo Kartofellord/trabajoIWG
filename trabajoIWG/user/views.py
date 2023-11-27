@@ -161,7 +161,7 @@ def news(request):
         lat = request.POST.get('lat')
         link = request.POST.get('link')
 
-        news = Posts.objects.create(user = request.user, nTitle = nTitle, nBody = nBody, lat = lat, lng = lng)
+        news = Posts.objects.create(user = request.user, nTitle = nTitle, nBody = nBody, lat = lat, lng = lng, link = link)
         news.save()
 
         return redirect("http://127.0.0.1:8000/foro/")
